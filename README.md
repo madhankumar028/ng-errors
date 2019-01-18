@@ -1,4 +1,4 @@
-# ng-error
+# ng6-error
 
 Angular error component which handles the field level error messages of your Reactive-forms without polluting much your template.
 
@@ -7,7 +7,7 @@ Angular error component which handles the field level error messages of your Rea
 
 
 #### How to Install it
-`npm i ng-error`
+`npm i ng6-error`
 
 #### Handled-Validations
 | Name | Error-Message |
@@ -24,7 +24,7 @@ Angular error component which handles the field level error messages of your Rea
 After installing follow the below steps to use the NgError component in your application.
 
 ##### Step: 1
-`import {NgErrorModule} from 'ng-error';`
+`import {NgErrorModule} from 'ng6-error';`
 
 ##### Step: 2
 *app.component.ts*
