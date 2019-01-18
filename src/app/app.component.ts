@@ -1,4 +1,3 @@
-// import { NgErrorComponent } from './../../projects/ng-error/src/lib/ng-error.component';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({

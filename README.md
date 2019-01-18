@@ -9,6 +9,9 @@ Angular error component which handles the field level error messages of your Rea
 #### How to Install it
 `npm i ng6-error`
 
+#### Demo
+You can see the demo of this library [here](https://stackblitz.com/edit/ng6-errors).
+
 #### Handled-Validations
 | Name | Error-Message |
 | :--- | :----------:  |
