@@ -12,6 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/madhankumar028/ng-errors.git"
   },
+  "private": true,
   "description": "Angular Util library to handle field level error messages",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
