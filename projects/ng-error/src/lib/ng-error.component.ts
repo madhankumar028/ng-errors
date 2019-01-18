@@ -1,6 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl, AbstractControlDirective } from '@angular/forms';
 
+/**
+ * ngError component
+ * 
+ * Util library component which handles the field
+ * level error messages inside the angular reactive forms
+ * 
+ * @author: Madhankumar J<madhankumar028@gmail.com>
+ */
+
 @Component({
 	selector: 'ng-error'
 })
