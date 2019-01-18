@@ -1,0 +1,4 @@
+<small [ngStyle]="{'display': 'table', 'color': 'red'}"
+    *ngFor="let ngError of listNgErrors(); let last=last;">
+    {{last ? ngError: ''}}
+</small>
