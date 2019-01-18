@@ -1,5 +1,5 @@
 {
-  "name": "ng-error",
+  "name": "ng-errors",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -9,19 +9,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  
-  "author": "Madhankumar J<madhankumar028@gmail.com>",
-  "license": "MIT",
-  "keywords": [
-    "ng-error",
-    "error-handling",
-    "reactive-forms"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/madhankumar028/ng-errors.git"
-  },
-  "description": "Angular Util library to handle field level error messages",
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.1.0",

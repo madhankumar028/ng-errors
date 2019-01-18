@@ -18,10 +18,10 @@
       "dom"
     ],
     "paths": {
-      "NgError": [
+      "ng-error": [
         "dist/ng-error"
       ],
-      "NgError/*": [
+      "ng-error/*": [
         "dist/ng-error/*"
       ]
     }
