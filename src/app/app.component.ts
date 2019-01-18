@@ -19,8 +19,19 @@ export class AppComponent {
 
   constructDemoForm() {
     this.demoForm = this.formBuilder.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required]
+      userName: ['',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(8)
+        ]
+      ],
+      password: ['',
+        [
+          Validators.required,
+          Validators.minLength(4)
+        ]
+      ]
     });
   }
 }

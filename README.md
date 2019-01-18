@@ -1,27 +1,88 @@
-# NgError
+# ng-error
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
+Angular error component which handles the field level error messages of your Reactive-forms without polluting much your template.
 
-## Development server
+#### How to Install it
+`npm i ng-error`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+#### Handled-Validations
+| Name | Error-Message |
+| :--- | :----------:  |
+| required | This field is required |
+| maxlength| Maximum {{length}} characters are allowed |
+| minlength | Minimum {{length}} characters are allowed |
+| pattern | Invalid format |
+| min | Minimun amount should be ₹ ${min} |
+| max | Maximum amount should be ₹ ${max} |
+| email | Enter a valid email-id |
 
-## Code scaffolding
+#### Basic Usage
+After installing follow the below steps to use the NgError component in your application.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+##### Step: 1
+`import {NgErrorModule} from 'ng-error';`
 
-## Build
+##### Step: 2
+*app.component.ts*
+```{ts}
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+})
 
-## Running unit tests
+export class AppComponent {
+  demoForm: FormGroup;
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  constructor(private formBuilder: FormBuilder) {
+    this.constructDemoForm();
+  }
 
-## Running end-to-end tests
+  constructDemoForm() {
+    this.demoForm = this.formBuilder.group({
+      userName: ['',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(8)
+        ]
+      ],
+      password: ['',
+        [
+          Validators.required,
+          Validators.minLength(4)
+        ]
+      ]
+    });
+  }
+}
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+##### Step: 3
+*app.component.html*
+```
+<section class="form-section">
+  <form [formGroup]="demoForm" novalidate>
+    <div class="form-group">
+      <label for="first_name">User Name<b>*</b></label>
+      <input type="text" id="first_name" formControlName="userName" >
+      <ng-error [controlName]="demoForm.controls.userName"></ng-error>
+    </div>
+    <div class="form-group">
+      <label for="password">Password<b>*</b></label>
+      <input type="email" id="password" formControlName="password" >
+      <ng-error [controlName]="demoForm.controls.password"></ng-error>
+    </div>
+    <div>
+      <button class="btn submit-btn" [disabled]="demoForm.invalid" type="submit">Submit</button>
+      <button class="btn cancel-btn" type="reset">Reset</button>
+    </div>
+  </form>
+</section>
+```
+### Contributions
+Feel free to submit an issue if you find any bug. You can also work on any feature by creating a pull request or spread the world.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Show your interest by clicking ⭐️.

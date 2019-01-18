@@ -18,11 +18,16 @@ import { AbstractControl, AbstractControlDirective } from '@angular/forms';
 
 export class NgErrorComponent {
 	
-	ngErrorMsgList: any = [];
+	ngErrorMsgList: Array<String> = [];
 
 	@Input() controlName: AbstractControl | AbstractControlDirective
 
-	ngErrorHandler(type, params) {
+	/**
+	 * Handler to throw the corresponding error message
+	 * @param type {String}
+	 * @param params {Object}
+	 */
+	ngErrorHandler(type, params): String {
 		let ngErrorList = {
 			required	: (params) 	=> `This field is required`,
 			maxlength	: (params) 	=> `Maximum ${params.requiredLength} characters are allowed`,
@@ -30,23 +35,25 @@ export class NgErrorComponent {
 			pattern	    : (params) 	=> `Invalid format`,
 			min		    : (params) 	=> `Minimun amount should be ₹ ${params.min}`,
 			max		    : (params) 	=> `Maximum amount should be ₹ ${params.max}`,
-			whitespace  : (params)  => `White spaces are not allowed`
+			email  		: (params)  => `Enter a valid email-id`
 		}
-
 		return ngErrorList[type](params);
 	}
 
+	/**
+	 * Handles the AbstractControl errors and creates a list of ng-error
+	 */
 	listNgErrors() {
-		this.ngErrorMsgList = [];
-		
 		if (this.controlName.errors) {
+			this.ngErrorMsgList = [];
 			Object.keys(this.controlName.errors).map( error => {
 				this.controlName.touched || this.controlName.dirty
 					? this.ngErrorMsgList.push(this.ngErrorHandler(error, this.controlName.errors[error]))
 					: '';
 			});
+			return this.ngErrorMsgList;
+		} else {
+			return [];
 		}
-		
-		return this.ngErrorMsgList;
 	}
 }
