@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, AbstractControlDirective } from '@angular/forms';
 
 /**
@@ -16,19 +16,22 @@ import { AbstractControl, AbstractControlDirective } from '@angular/forms';
 	styleUrls: ['ng-error.component.scss']
 })
 
-export class NgErrorComponent {
+export class NgErrorComponent implements OnInit {
 	
-	ngErrorMsgList: Array<String> = [];
+	ngErrorMsgList: Array<string> = [];
+
+	ngDefaultErrorList: Object;
 
 	@Input() controlName: AbstractControl | AbstractControlDirective
+	
+	@Input() customErrorMessage: string;
 
-	/**
-	 * Handler to throw the corresponding error message
-	 * @param type {String}
-	 * @param params {Object}
-	 */
-	ngErrorHandler(type, params): String {
-		let ngErrorList = {
+	ngOnInit() {
+		this.prepareDefaultNgValidatorList();
+	}
+
+	prepareDefaultNgValidatorList() {
+		this.ngDefaultErrorList = {
 			required	: (params) 	=> `This field is required`,
 			maxlength	: (params) 	=> `Maximum ${params.requiredLength} characters are allowed`,
 			minlength	: (params) 	=> `Minimum ${params.requiredLength} characters are required`,
@@ -36,24 +39,39 @@ export class NgErrorComponent {
 			min		    : (params) 	=> `Minimun amount should be ₹ ${params.min}`,
 			max		    : (params) 	=> `Maximum amount should be ₹ ${params.max}`,
 			email  		: (params)  => `Enter a valid email-id`
-		}
-		return ngErrorList[type](params);
+		};
+	}
+
+	/**
+	 * Handler to throw the corresponding error message
+	 * @param type {String}
+	 * @param params {Object}
+	 */
+	ngErrorHandler(type, params): string {
+		return this.ngDefaultErrorList[type](params);
+	}
+
+	isDefaultValidator(validator: string): boolean {
+		return this.ngDefaultErrorList.hasOwnProperty(validator);
 	}
 
 	/**
 	 * Handles the AbstractControl errors and creates a list of ng-error
 	 */
 	listNgErrors() {
+		
+		this.ngErrorMsgList = [];
+		
 		if (this.controlName.errors) {
-			this.ngErrorMsgList = [];
 			Object.keys(this.controlName.errors).map( error => {
 				this.controlName.touched || this.controlName.dirty
-					? this.ngErrorMsgList.push(this.ngErrorHandler(error, this.controlName.errors[error]))
-					: '';
+					? this.ngErrorMsgList.push(
+						this.isDefaultValidator(error)
+						? this.ngErrorHandler(error, this.controlName.errors[error])
+						: this.customErrorMessage
+					) : '';
 			});
-			return this.ngErrorMsgList;
-		} else {
-			return [];
 		}
+		return this.ngErrorMsgList;
 	}
 }
