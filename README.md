@@ -4,7 +4,7 @@ Angular error component which handles the field level error messages of your Rea
 
 ![TotalDownloads](https://img.shields.io/npm/dt/ng6-error.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 
 #### How to Install it
